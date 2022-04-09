@@ -1,0 +1,10 @@
+class Cartas:
+    figuras = ["trebol", "diamante", "corazon", "picas"]
+    numeros = ["1","2","3","4","5","6","7","8","9","10",
+               "J","Q","K"]
+    color=["negro","rojo"]
+    
+    def __init_ (self, valor="", figura="",color=""):
+        self.valor=valor
+        self.figura=figura
+        self.color=color 
