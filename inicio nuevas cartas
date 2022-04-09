@@ -8,3 +8,33 @@ class Cartas:
         self.valor=valor
         self.figura=figura
         self.color=color 
+#codigo que da todas las posibilidades de las cartas sin color
+class Carta:
+    
+    figuras = ["trebol", "diamante", "corazon", "picas"]
+    numeros = ["A","2","3","4","5","6","7","8","9","10",
+               "J","Q","K"]
+    
+    def __init__(self, fig=0, num=0):
+        self.palo = fig
+        self.numero = num
+        
+    def __str__(self):
+        figr=self.figuras[self.palo-1]
+        nume=self.numeros[self.numero-1]
+        msn="{0} de {1}".format(nume,figr)
+        return msn
+        class Baraja:
+    
+    def __init__(self):
+        self.cartas =[]
+        for fig in range(1,5):
+            for num in range(1,14):
+                carta = Carta(fig,num)
+                self.cartas.append(carta)
+
+    def __str__(self):
+        msn=""
+        for carta in self.cartas:
+            msn += str(carta) + "\n"
+        return msn
