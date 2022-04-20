@@ -1,14 +1,13 @@
 import random
 
-
 class Cartas:
     figuras = ["trebol", "picas","diamante", "corazon"]
     numeros = ["A","2","3","4","5","6","7","8","9","10",
                "J","Q","K"]
     colores=["negro","rojo"]
     
-    def __init__(self, figura=0, numero=0, face="",color=""):
-        self.figura = figura
+    def __init__(self, figura, numero=0, face="",color=""):
+        self.figura = random.randint(0,3)
         self.numero = numero
         self.face=face
         if self.figura ==0 or self.figura ==1:
@@ -51,10 +50,7 @@ class Baraja:
 
 baraja = Baraja()
 print(baraja)
-# class Pilares:
 
-# class Face_down:
-#------------------------------------------- restricciones------------------------------------------------
 
 
 
