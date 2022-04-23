@@ -269,24 +269,22 @@ class Baraja(pygame.sprite.Sprite):
 baraja = Baraja()
 print(baraja)
 #--------------------------------------------------------------------------------------------------------------------------------------
+#visualización de una carta
 import pygame
 import sys
 import objetos
-
-wn=pygame.display.set_mode((800,600))#longitudes de ventana
-green=51,162,0
-card=objetos.Cartas(0, 2, 'boca_arriba', 'negro')
-nombre=str(card.figura+card.numero)
-carta=pygame.image.load("cards/0{0}.png".format(nombre)).convert()#buscar la carta 
+#ubicaciones
+x=40
+y=30
+wn=pygame.display.set_mode((1000,800))#longitudes de ventana
+card=objetos.Cartas(2, 5, 'boca_arriba', 'negro')
+carta=pygame.image.load("cards/{0}{1}.png".format(card.figura,card.numero)).convert()#buscar la carta 
 clock=pygame.time.Clock()
 green=51,162,0
 while True:
 	for event in pygame.event.get():
 		if event.type==pygame.QUIT:
 			sys.exit()
-	coordenada=pygame.mouse.get_pos()
-	x=coordenada[0]
-	y=coordenada[1] #x y y existen porque coordenada es una tupla
 	wn.fill(green) #color de fondo
 	wn.blit(carta,[x,y]) #ubicación y ancho/largo
 	pygame.display.flip()
