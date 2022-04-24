@@ -301,8 +301,6 @@ class Cartas(pygame.sprite.Sprite):
     figuras = ["trebol", "picas","diamante", "corazon"]
     numeros = ["A","2","3","4","5","6","7","8","9","10",
                "J","Q","K"]
-    colores=["negro","rojo"]
-    
     def __init__(self, figura, numero=0, face="",color=""):
         super().__init__()
         self._figura = figura
@@ -320,7 +318,6 @@ class Cartas(pygame.sprite.Sprite):
         return self._numero   
     def __str__(self):
        return (f'{self.numeros[self.numero]} de {self.figuras[self.figura]}, color: {self.color}, está {self.face}')
-
 class Baraja(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -340,8 +337,7 @@ class Baraja(pygame.sprite.Sprite):
                         carta = Cartas(figura, numero, lado)
                         while carta in self.baraja and carta in self.baraja_arriba:
                                carta = Cartas(random.randint(0, 3), random.randint(0, 12), lado)
-                        self.baraja.append(carta) 
-                        
+                        self.baraja.append(carta)            
                 else:
                     carta=Cartas(figura,numero,lado)
                     while carta in self.baraja and carta in self.baraja_arriba:
