@@ -1,7 +1,6 @@
 import random
 import sys
 import pygame as pyg
-#from pygame.locals import *
 import pygame
 
 #figuras
