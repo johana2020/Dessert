@@ -1,6 +1,7 @@
 import random
 import sys
 import pygame as pyg
+#from pygame.locals import *
 import pygame
 
 #figuras
@@ -72,7 +73,7 @@ def load_image(filename, transparent=False):
 		return image
 
 class Carta(pygame.sprite.Sprite):
-	def __init__(self, numero, pinta, posx=-1, posy=-1):
+	def _init_(self, numero, pinta, posx=-1, posy=-1):
 		self.pila = None
 		self.clicked = False
 		self.pinta = pinta
@@ -127,7 +128,7 @@ class Carta(pygame.sprite.Sprite):
             
 
 class maz_arriba(pygame.sprite.Sprite):
-	def __init__(self, pinta, posx=-1, posy=-1):
+	def _init_(self, pinta, posx=-1, posy=-1):
 		self.pinta = pinta
 		self.image = load_image("cards\\"+pinta+".png")
 		self.arri_izq(posx, posy)
@@ -141,7 +142,7 @@ class maz_arriba(pygame.sprite.Sprite):
 
 
 class mazo(pygame.sprite.Sprite):
-	def __init__(self):
+	def _init_(self):
 		self.image = load_image("cards\\back.png")
 		self.arri_izq(maz_x_ini, maz_y_ini)
 		self.cartas = []
@@ -165,7 +166,7 @@ class mazo(pygame.sprite.Sprite):
     
 
 class Juego:
-	def __init__(self):
+	def _init_(self):
 		self._running = True
 		self.screen = None
 		self.size = self.width, self.height = WIDTH, HEIGHT
@@ -399,8 +400,6 @@ class Juego:
 			return True
 		else:
 			return False
-
 if __name__ == "__main__":
-	juego = Juego()
-	juego.ejecucion()
-    
+    juego = Juego()
+    juego.ejecucion()
