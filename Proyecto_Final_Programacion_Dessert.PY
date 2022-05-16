@@ -1,8 +1,6 @@
 import random
 import pygame as pyg
 
-import pygame
-
 #figuras
 trebol = "T"
 pica = "P"
@@ -20,7 +18,7 @@ carta_boca_arriba = 3
 abajo = 0
 arriba = 1
 
-#colores # asignamos los colores que hay  del juego para desarrollar la logica 
+#colores # asignamos los colores que hay del juego para desarrollar la logica 
 negro = 0
 rojo = 1
 
@@ -61,8 +59,9 @@ WIDTH = palo_x_ini*3 + dis_x_palo*7
 HEIGHT = 500
 
 def load_image(filename, transparent=False): # sirve para que cuando carguemos las imagenes si ocurre un error cierre el programa 
-		try: image = pygame.image.load(filename)
-		except pygame.error:
+		try: image = pyg.image.load(filename)
+        
+		except pyg.error:
 				raise (SystemExit)
 		image = image.convert()
 		if transparent:
@@ -70,7 +69,7 @@ def load_image(filename, transparent=False): # sirve para que cuando carguemos l
 				image.set_colorkey(color)
 		return image
 
-class Carta(pygame.sprite.Sprite): # damos los atributos necesarios para dar a las cartas un color un estado,y  una figura, cuando jugamos es necesario para implementar la logica 
+class Carta(pyg.sprite.Sprite): # damos los atributos necesarios para dar a las cartas un color un estado,y  una figura, cuando jugamos es necesario para implementar la logica 
 	def __init__(self, numero, pinta, posx=-1, posy=-1):
 		self.pila = None
 		self.clicked = False
@@ -81,8 +80,8 @@ class Carta(pygame.sprite.Sprite): # damos los atributos necesarios para dar a l
 			self.color = rojo
 		self.numero = numero
 		self.estado = abajo
-		# pygame
-		self.image = load_image("cards\\back.png")#imagen de las cartas boca abajo 
+		# pyg
+		self.image = load_image("cards/back.png")#imagen de las cartas boca abajo 
 		self.arri_izq(posx, posy)
         
 	def arri_izq(self, x, y):
@@ -116,7 +115,7 @@ class Carta(pygame.sprite.Sprite): # damos los atributos necesarios para dar a l
 	def ocultar(self): # nos permite dar a la carta un estado como boca abajo  junto a la imagen que tenemos definada para el mismo 
 		if self.estado == arriba:
 			self.estado = abajo
-			self.image = load_image("cards\\back.png")
+			self.image = load_image("cards\back.png")
             
 	def cambiar(self): # nos permite saber en que estado se encuentra la carta y mostrarla  
 		if self.estado == arriba:
@@ -125,10 +124,10 @@ class Carta(pygame.sprite.Sprite): # damos los atributos necesarios para dar a l
 			self.mostrar()
             
 
-class maz_arriba(pygame.sprite.Sprite): # nos permite tener el movimiento el la parte de trabajo de arriba, asignando una pinta o figura, da una imagen y recibe las cartas que debemos organizar 
+class maz_arriba(pyg.sprite.Sprite): # nos permite tener el movimiento el la parte de trabajo de arriba, asignando una pinta o figura, da una imagen y recibe las cartas que debemos organizar 
 	def __init__(self, pinta, posx=-1, posy=-1):
 		self.pinta = pinta
-		self.image = load_image("cards\\"+pinta+".png")
+		self.image = load_image(f"cards/{self.pinta}.png")
 		self.arri_izq(posx, posy)
 		self.cartas = []
         
@@ -139,9 +138,9 @@ class maz_arriba(pygame.sprite.Sprite): # nos permite tener el movimiento el la 
 		self.rect.topleft = (self.posx, self.posy)
 
 
-class mazo(pygame.sprite.Sprite):# nos permite el movimiento en la parte superior izquierda y en los bordes que definimos como screen (rectangulo) 
+class mazo(pyg.sprite.Sprite):# nos permite el movimiento en la parte superior izquierda y en los bordes que definimos como screen (rectangulo) 
 	def __init__(self):
-		self.image = load_image("cards\\back.png")
+		self.image = load_image("cards/back.png")
 		self.arri_izq(maz_x_ini, maz_y_ini)
 		self.cartas = []
 		self.crearmazo()
@@ -173,7 +172,7 @@ class Juego:
 	def on_init(self): # crea la pantalla carga las cartas imagenes  y da nombre a nuestra ventana, y crea nuestras listas vacias donde va a guaradar las cartas  
 		pyg.init()
 		self.screen = pyg.display.set_mode(self.size)
-		pyg.display.set_caption("Dessert.")
+		pyg.display.set_caption("Dessert<3.")
 		self.background = load_image('cards/bg.png')
 		self.pilas = []
 		self.pilas_subir = []
@@ -189,7 +188,7 @@ class Juego:
 				desp += dis_y_palo
 		#Verificar si gano
 		f = True
-		for pilasub in self.pilas_subir: # tenemos una lsita vacia en la que vamos a trabajar organizando las cartas de forma ascendem¿nte hasta llegar a la 13, cuando completemos las 4 pintas con cada una de sus carats finaliza el juego y gana 
+		for pilasub in self.pilas_subir: # tenemos una lista vacia en la que vamos a trabajar organizando las cartas de forma ascendem¿nte hasta llegar a la 13, cuando completemos las 4 pintas con cada una de sus carats finaliza el juego y gana 
 			if len(pilasub.cartas) != 13:
 				f = False
 		if f:
@@ -234,7 +233,7 @@ class Juego:
 		pyg.quit() # cierra la pantalla 
 
 	def evento(self, evento):
-		if evento.type == pygame.QUIT:
+		if evento.type == pyg.QUIT:
 			self._running = False
 		elif evento.type == pyg.KEYDOWN:
 			if evento.key == pyg.K_ESCAPE:
@@ -245,7 +244,7 @@ class Juego:
 			tipo = None
 			for i in self.pilas:
 				for x in i:
-					if x.rect.collidepoint(pos): # provamos si x esta en las pilas o en que posicion 
+					if x.rect.collidepoint(pos): # probamos si x esta en las pilas o en que posicion 
 						tipo = palo
 						self.clicked_sprites.append(x) # movimiento 
 
@@ -323,7 +322,7 @@ class Juego:
 
 #----- FUNCIONES DEL JUEGO -----
 	def ganar(self):
-		print ("GANASTEEEEEEEEE") # cuando el usuario finalice el juego exitosa mente mostrara  que gano 
+		print ("GANASTEEEEEEEEE") # cuando el usuario finalice el juego exitosamente mostrará que ganó.
 		self._running = False
         
 	def subir(self, card, piladrop_index):
