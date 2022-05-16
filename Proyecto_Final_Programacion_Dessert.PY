@@ -173,7 +173,7 @@ class Juego:
 	def on_init(self): # crea la pantalla carga las cartas imagenes  y da nombre a nuestra ventana, y crea nuestras listas vacias donde va a guaradar las cartas  
 		pyg.init()
 		self.screen = pyg.display.set_mode(self.size)
-		pyg.display.set_caption("Dissert.")
+		pyg.display.set_caption("Dessert.")
 		self.background = load_image('cards/bg.png')
 		self.pilas = []
 		self.pilas_subir = []
